@@ -34,51 +34,40 @@ late final TextEditingController _password ;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar : AppBar( title:const Text('register')) ,
-      body: FutureBuilder(
-        future: Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,
-                   ),
-        builder: (context, snapshot) {
-          switch(snapshot.connectionState){
-            case ConnectionState.done:
-                  return  Column(
-                    
-                children: [
-                  TextField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration( hintText: 'enter your email'),
-                  ),
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: const InputDecoration( hintText: 'enter your password'),
-                  ),
-                  TextButton(onPressed: () async {
-              
-                    final email = _email.text ;
-                    final password = _password.text;
-                final user =    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-                print(user);
-                  },
-                  child: const Text('registre'),
-                  ),
-                ],
-              );
+     return  Scaffold(
+      appBar: AppBar(title: const Text('register')),
+       body: Column(
+                      
+                  children: [
+                    TextField(
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration( hintText: 'enter your email'),
+                    ),
+                    TextField(
+                      controller: _password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: const InputDecoration( hintText: 'enter your password'),
+                    ),
+                    TextButton(onPressed: () async {
+                
+                      final email = _email.text ;
+                      final password = _password.text;
+                  final user =    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+                  print(user);
+                    },
+                    child: const Text('registre'),
+                    ),
+                    TextButton(onPressed: (() {
+                      Navigator.of(context).pushNamedAndRemoveUntil('/login/',
+                       (route) => false);
+                    }), child: const Text('I have an account')
+                    ),
+                  ],
+                ),
+     );
 
-              default :
-              return  const Text('loading');
-
-          }
-     
-          
-        
-        },
-      ),
-    );
-    
   }
 }
