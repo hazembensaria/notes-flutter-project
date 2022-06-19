@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/Constance/routes.dart';
 
 import '../Utilities/ErrorAlert.dart';
-import '../firebase_options.dart';
-import 'dart:developer' as dev show log;
+
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -56,21 +54,21 @@ late final TextEditingController _password ;
                       final email = _email.text ;
                       final password = _password.text;
                       try{
-                  final user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password,);
-                  // ignore: use_build_context_synchronously
-                  Navigator.of(context).pushNamedAndRemoveUntil(notesRoute,
-                   (route) => false);
-                  }
-                  on FirebaseAuthException catch (e){
-                  if(e.code == 'user-not-found'){
-                    await showErrorDialog(context, e.code);
-                  }else{
-                 await showErrorDialog(context, e.code);
-                  }
+                            await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password,);
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context).pushNamedAndRemoveUntil(notesRoute,
+                            (route) => false);
+                            }
+                            on FirebaseAuthException catch (e){
+                            if(e.code == 'user-not-found'){
+                              await showErrorDialog(context, e.code);
+                            }else{
+                           await showErrorDialog(context, e.code);
+                            }
     
-                  }catch (e){
+                          }catch (e){
                        await showErrorDialog(context, e.toString());
-                  }
+                                    }
                     },
                     child: const Text('Login'),
                     ),

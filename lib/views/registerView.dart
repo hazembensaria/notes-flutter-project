@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as dev show log;
+
 
 import 'package:mynotes/Constance/routes.dart';
 import 'package:mynotes/Utilities/ErrorAlert.dart';
@@ -56,10 +56,15 @@ late final TextEditingController _password ;
                       final email = _email.text ;
                       final password = _password.text;
                       try{
-                  final user =    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+                        await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+                        final user = FirebaseAuth.instance.currentUser ; 
+                        await user?.sendEmailVerification();
+                        Navigator.of(context).pushNamed(VerifyEmailRoute);
                       }
-                  catch(e){
-                      await showErrorDialog(context, e.toString());
+                 on FirebaseAuthException catch (e){
+                      await showErrorDialog(context, e.code);
+                  }catch(e){
+                    await showErrorDialog(context, e.toString());
                   }
                     },
                     child: const Text('registre'),

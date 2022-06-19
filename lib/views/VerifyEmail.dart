@@ -15,12 +15,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
       appBar: AppBar(title: const Text('verify email')),
       body: Column(
           children: [
-          const Text('please verify your email ')  ,
+              const Text('we sent you a mail please go and check it , it may be in spam ')  ,
+          const Text('try again if you d\'ont receve an email ')  ,
                 TextButton(onPressed: (() async{
                   final user = FirebaseAuth.instance.currentUser ; 
                   await user?.sendEmailVerification();
                   print('mail sended');
-                }), child: const Text('Verify email'))
+                }), child: const Text('send mail again'))
         ]),
     );
     
