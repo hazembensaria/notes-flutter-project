@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/Constance/routes.dart';
 
+import '../Utilities/ErrorAlert.dart';
 import '../firebase_options.dart';
 import 'dart:developer' as dev show log;
 
@@ -62,11 +63,13 @@ late final TextEditingController _password ;
                   }
                   on FirebaseAuthException catch (e){
                   if(e.code == 'user-not-found'){
-                    dev.log("user-not-found");
+                    await showErrorDialog(context, e.code);
                   }else{
-                    dev.log(e.code) ;
+                 await showErrorDialog(context, e.code);
                   }
     
+                  }catch (e){
+                       await showErrorDialog(context, e.toString());
                   }
                     },
                     child: const Text('Login'),
@@ -82,6 +85,6 @@ late final TextEditingController _password ;
     );
     
   }
-
-
 }
+
+

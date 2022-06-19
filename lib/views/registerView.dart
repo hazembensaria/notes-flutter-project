@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as dev show log;
 
 import 'package:mynotes/Constance/routes.dart';
+import 'package:mynotes/Utilities/ErrorAlert.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -54,8 +55,12 @@ late final TextEditingController _password ;
                 
                       final email = _email.text ;
                       final password = _password.text;
+                      try{
                   final user =    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-                  dev.log(user.toString());
+                      }
+                  catch(e){
+                      await showErrorDialog(context, e.toString());
+                  }
                     },
                     child: const Text('registre'),
                     ),
