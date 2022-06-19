@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "57355257284",
+    "project_id": "mynotes-hazem-windows",
+    "storage_bucket": "mynotes-hazem-windows.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57355257284:android:96eb4ecf35896d87dc1091",
+        "android_client_info": {
+          "package_name": "tn.hazem.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57355257284-b0a9ctdsj6qostn8nrgo9llm7a2o8t82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3fS38LCHcZ6ErKAf9hPKwjaa4QqzeAw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57355257284-b0a9ctdsj6qostn8nrgo9llm7a2o8t82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
