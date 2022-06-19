@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mynotes/Constance/routes.dart';
 import 'package:mynotes/views/LoginView.dart';
 import 'package:mynotes/views/VerifyEmail.dart';
 import 'package:mynotes/views/registerView.dart';
@@ -17,8 +18,9 @@ void main() {
       ),
       home: const HomeView(),
       routes: {
-        '/login/':(context) => const LoginView(),
-        '/register/':(context) => const RegisterView()
+        loginRoute:(context) => const LoginView(),
+        registerRoute:(context) => const RegisterView(),
+        notesRoute:(context) => const NotesView()
       },
     )
   );
@@ -46,13 +48,7 @@ class HomeView extends StatelessWidget {
             }else{
               return const LoginView();
             }
-            return  const NotesView();
-          //   if(user?.emailVerified ?? false){
-          //         return Text('done') ;
-          //   }else{
-          //  return const VerifyEmail();
-              // } 
-                        return const LoginView();
+            return  const NotesView();    
               default :
               return  const CircularProgressIndicator();
 
@@ -65,6 +61,7 @@ class HomeView extends StatelessWidget {
   }
 }
 enum MenuAction{logout}
+
 class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
 
@@ -85,7 +82,7 @@ class _NotesViewState extends State<NotesView> {
              final shouldLogOut = await showLogOutDialog(context);
              if(shouldLogOut){
               await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushNamedAndRemoveUntil('/login/',
+              Navigator.of(context).pushNamedAndRemoveUntil(loginRoute,
                (route) => false);
              }
              break;
